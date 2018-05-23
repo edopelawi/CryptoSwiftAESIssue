@@ -12,7 +12,23 @@
 		8DE8665620B5720C004F9019 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8DE8665420B5720C004F9019 /* Main.storyboard */; };
 		8DE8665820B5720E004F9019 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8DE8665720B5720E004F9019 /* Assets.xcassets */; };
 		8DE8665B20B5720E004F9019 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8DE8665920B5720E004F9019 /* LaunchScreen.storyboard */; };
+		8DE8666420B572FE004F9019 /* CryptoSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8DE8666320B572FE004F9019 /* CryptoSwift.framework */; };
+		8DE8666720B5732D004F9019 /* CryptoSwift.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 8DE8666320B572FE004F9019 /* CryptoSwift.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		8DE8666820B5732E004F9019 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				8DE8666720B5732D004F9019 /* CryptoSwift.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		8DE8664D20B5720C004F9019 /* CryptoSwiftAESIssue.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CryptoSwiftAESIssue.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -22,6 +38,7 @@
 		8DE8665720B5720E004F9019 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		8DE8665A20B5720E004F9019 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		8DE8665C20B5720E004F9019 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		8DE8666320B572FE004F9019 /* CryptoSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CryptoSwift.framework; path = Carthage/Build/iOS/CryptoSwift.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -29,6 +46,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8DE8666420B572FE004F9019 /* CryptoSwift.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -40,6 +58,7 @@
 			children = (
 				8DE8664F20B5720C004F9019 /* CryptoSwiftAESIssue */,
 				8DE8664E20B5720C004F9019 /* Products */,
+				8DE8666220B572FE004F9019 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -50,6 +69,7 @@
 			);
 			name = Products;
 			sourceTree = "<group>";
+			wrapsLines = 0;
 		};
 		8DE8664F20B5720C004F9019 /* CryptoSwiftAESIssue */ = {
 			isa = PBXGroup;
@@ -64,6 +84,14 @@
 			path = CryptoSwiftAESIssue;
 			sourceTree = "<group>";
 		};
+		8DE8666220B572FE004F9019 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				8DE8666320B572FE004F9019 /* CryptoSwift.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -74,6 +102,7 @@
 				8DE8664920B5720C004F9019 /* Sources */,
 				8DE8664A20B5720C004F9019 /* Frameworks */,
 				8DE8664B20B5720C004F9019 /* Resources */,
+				8DE8666820B5732E004F9019 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -282,6 +311,10 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = GX458V4RKG;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				INFOPLIST_FILE = CryptoSwiftAESIssue/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -300,6 +333,10 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = GX458V4RKG;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				INFOPLIST_FILE = CryptoSwiftAESIssue/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
