@@ -7,19 +7,65 @@
 //
 
 import UIKit
+import CryptoSwift
 
-class ViewController: UIViewController {
+final class ViewController: UIViewController {
 
 	override func viewDidLoad() {
 		super.viewDidLoad()
-		// Do any additional setup after loading the view, typically from a nib.
+		testEncryption()
 	}
 
-	override func didReceiveMemoryWarning() {
-		super.didReceiveMemoryWarning()
-		// Dispose of any resources that can be recreated.
+	private func testEncryption() {
+
+		let inputString = "2018-01-24T04:33:53Z"
+		print("Input string: \(inputString)")
+
+		guard let chiper = createChiper() else {
+			return
+		}
+
+		do {
+			let inputBytes = Array(inputString.utf8)
+			let chiperResult = try chiper.encrypt(inputBytes)
+
+			print("Chiper result byte: \(chiperResult)")
+
+			let resultBase64 = Data(bytes: chiperResult).base64EncodedString()
+
+			print("Chiper result Base64 string: \(resultBase64)")
+		} catch {
+			print("Failed to encrypt input, error: \(error)")
+		}
+
 	}
 
+
+	private func createChiper() -> AES? {
+
+		let key: [UInt8] = [
+			0x1a, 0x2b, 0x3c, 0x4d,
+			0x5e, 0x6f, 0x7a, 0x8b,
+			0x1a, 0x2b, 0x3c, 0x4d,
+			0x5e, 0x6f, 0x7a, 0x8b
+		]
+
+		let iv: [UInt8] = [
+			0x00, 0xff, 0xde, 0x11,
+			0x00, 0x57, 0xde, 0x9d,
+			0x00, 0xff, 0xde, 0x11,
+			0x00, 0x57, 0xde, 0x9d
+		]
+
+		let blockMode = BlockMode.CBC(iv: iv)
+
+		do {
+			return try AES(key: key, blockMode: blockMode, padding: Padding.pkcs5)
+		} catch {
+			print("Failed to create chiper, error: \(error)")
+			return nil
+		}
+	}
 
 }
 
