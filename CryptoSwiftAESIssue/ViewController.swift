@@ -49,7 +49,7 @@ final class ViewController: UIViewController {
 
 		do {
 			let chiperKey = try generateKey(salt: salt, password: secretKey)
-			let blockMode = BlockMode.CBC(iv: iv.hexaBytes)
+			let blockMode = CBC(iv: iv.hexaBytes)
 			return try AES(key: chiperKey, blockMode: blockMode, padding: Padding.pkcs5)
 		} catch {
 			print("Failed to create chiper, error: \(error)")
