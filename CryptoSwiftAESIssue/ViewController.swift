@@ -19,7 +19,7 @@ final class ViewController: UIViewController {
 	private func testEncryption() {
 
 		let inputString = "2018-01-24T04:33:53Z"
-		print("Input string: \(inputString)")
+		print("Input string: \(inputString)")		
 
 		guard let chiper = createChiper() else {
 			return
@@ -43,29 +43,34 @@ final class ViewController: UIViewController {
 
 	private func createChiper() -> AES? {
 
-		let key: [UInt8] = [
-			0x1a, 0x2b, 0x3c, 0x4d,
-			0x5e, 0x6f, 0x7a, 0x8b,
-			0x1a, 0x2b, 0x3c, 0x4d,
-			0x5e, 0x6f, 0x7a, 0x8b
-		]
-
-		let iv: [UInt8] = [
-			0x00, 0xff, 0xde, 0x11,
-			0x00, 0x57, 0xde, 0x9d,
-			0x00, 0xff, 0xde, 0x11,
-			0x00, 0x57, 0xde, 0x9d
-		]
-
-		let blockMode = BlockMode.CBC(iv: iv)
+		let salt = "1234567890aedefbc79654d99766ce08"
+		let iv = "b987654321bdaef8765abde689adc876"
+		let secretKey = "BADSVGuADAVEdgate100AFaLUHAJBUYEaegaetv124560980"
 
 		do {
-			return try AES(key: key, blockMode: blockMode, padding: Padding.pkcs5)
+			let chiperKey = try generateKey(salt: salt, password: secretKey)
+			let blockMode = BlockMode.CBC(iv: iv.hexaBytes)
+			return try AES(key: chiperKey, blockMode: blockMode, padding: Padding.pkcs5)
 		} catch {
 			print("Failed to create chiper, error: \(error)")
 			return nil
 		}
 	}
 
+	private func generateKey(salt: String, password: String, keyLength: Int? = 128, iterations: Int = 1000) throws -> Array<UInt8> {
+
+		let utf8Password = Array(password.utf8)
+		let hexSalt = salt.hexaBytes
+
+		let generator = try PKCS5.PBKDF2.init(
+			password: utf8Password,
+			salt: hexSalt,
+			iterations: iterations,
+			keyLength: keyLength,
+			variant: .sha1
+		)
+
+		return try generator.calculate()
+	}
 }
 
